@@ -17,6 +17,10 @@ else
 hardware_model=255
 fi
 
+if [ -f /boot/firmware/config.txt ]; then
+sudo ln -sf /boot/firmware/config.txt /boot/config.txt
+fi
+
 if [ $hardware_model -eq 5 ]; then
 sudo cp -rf ./boot/config-nomal-PI5.txt ./boot/config.txt.bak
 else
