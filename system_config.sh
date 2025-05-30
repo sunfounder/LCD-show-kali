@@ -21,6 +21,10 @@ if [ -f /boot/firmware/config.txt ]; then
 sudo ln -sf /boot/firmware/config.txt /boot/config.txt
 fi
 
+if ! [ -d /boot/overlays ]; then
+sudo ln -sf /boot/firmware/overlays /boot/overlays
+fi
+
 if [ $hardware_model -eq 5 ]; then
 sudo cp -rf ./boot/config-nomal-PI5.txt ./boot/config.txt.bak
 else
