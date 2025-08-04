@@ -6,15 +6,15 @@ for i in {0..9}; do
     
     # 检查设备是否存在
     if [ -d "$fb_device" ]; then
-        modes_file="$fb_device/modes"
+        name_file="$fb_device/name"
         
-        # 检查modes文件是否存在
-        if [ -f "$modes_file" ]; then
-            # 获取modes内容
-            modes=$(cat "$modes_file")
+        # 检查name文件是否存在
+        if [ -f "$name_file" ]; then
+            # 获取name内容
+            name=$(cat "$name_file")
             
             # 检查是否包含目标模式
-            if echo "$modes" | grep -q "U:480x320p-0"; then
+            if echo "$name" | grep -q "fb_ili9486"; then
                 echo "fb$i"
                 exit 0
             fi
@@ -22,5 +22,5 @@ for i in {0..9}; do
     fi
 done
 
-echo "[ERROR]: not found fb device with U:480x320p-0 mode"
+echo "[ERROR]: not found fb device with name fb_ili9486"
 exit 1
