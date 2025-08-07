@@ -28,8 +28,12 @@ sudo cp -rf ./boot/config.txt.bak /boot/config.txt
 sudo cp -rf ./usr/99-calibration.conf-mhs35ips-90  /etc/X11/xorg.conf.d/99-calibration.conf
 
 fb=$(./get_fb.sh)
-echo "Found MHS35 IPS on fb device: $fb"
-sudo cp -f ./usr/99-fbturbo-$fb.conf /usr/share/X11/xorg.conf.d/99-fbturbo.conf
+if [ $? -eq 0 ]; then
+  echo "Found MHS35 IPS on fb device: fb$fb"
+else
+  echo "[WARNING] Not found MHS35 IPS, Maybe it's first time install, guess using fb$fb device"
+fi
+sudo cp -f ./usr/99-fbturbo-fb$fb.conf /usr/share/X11/xorg.conf.d/99-fbturbo.conf
 
 
 sudo touch ./.have_installed
